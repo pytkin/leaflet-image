@@ -47,7 +47,9 @@ module.exports = function leafletImage(map, callback) {
 
     function drawMarkerLayer(l) {
         if (l instanceof L.Marker && l.options.icon instanceof L.Icon) {
-            layerQueue.defer(handleMarkerLayer, l);
+            if (l._icon && l._icon.src) { // make sure that marker has marker image
+                layerQueue.defer(handleMarkerLayer, l);
+            }
         }
     }
     
